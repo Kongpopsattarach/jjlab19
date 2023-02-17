@@ -20,31 +20,22 @@ string toUpperStr(string x){
     return y;
 }
 
-void importDataFromFile(string filename,vector<string> names,vector<int> scores,vector<char> grades){
-    char name[100];
-    char grade[5];
-    int score;
-    int a = 0;
-    int b = 0;
-    int c = 0;
-
+void importDataFromFile(string filename,vector<string>& names,vector<int>& scores,vector<char>& grades){
     ifstream source;
-    source.open("name_score.txt");
+    source.open(filename);
     string textline;
-    while (getline(source,textline))
-    {
-        cout << textline << "\n";
-        sscanf(textline.c_str(),"%[^:]:%d %d %d",name,&a,&b,&c);
-        names.push_back(name);
-        score = a+b+c;
-        scores.push_back(score);
-        grades.push_back(score2grade(score));
+    int a,b,c,d;
+    while(getline(source,textline)){
+        char word[20];
+        sscanf(textline.c_str(),"%[^:]: %d %d %d", word, &a,&b,&c);
+        names.push_back(word);
+        d = a + b + c;
+        scores.push_back(d);
+        grades.push_back(score2grade(d));
     }
+}
 
-    }
-    
-
-void getCommand(string command,string key){
+void getCommand(string &command, string &key){
     cout << "Please input your command: ";
     string text;
     char com[100];
